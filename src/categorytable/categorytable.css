@@ -1,0 +1,41 @@
+.categorytable {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.position {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.position-info {
+    display: flex;
+    text-align: center;
+    justify-content: start;
+}
+
+
+
+.position-info div{
+    flex: 1;
+    text-align: center;
+}
+
+.position-info div:first-child{
+    flex: 0 0 50%;
+}
+
+.description {
+    border-radius: 5px;
+    background-color: rgb(212, 121, 121);
+}
+
+.description {
+    display: none;
+}
+
+.show-description {
+    display: block;
+}
