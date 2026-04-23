@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Papa from "papaparse";
 import CategoryTable from "./categorytable/categoryTable";
+import { Audio } from "react-loader-spinner";
 import "./App.css";
 
 function App() {
   const [headers, setHeaders] = useState([]);
   const [categories, setCategories] = useState([]);
   const [positions, setPosition] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     try {
@@ -37,11 +39,26 @@ function App() {
             setHeaders(headers.flat());
             setCategories(categories);
             setPosition(positions);
+            setLoading(false);
           },
         },
       );
     } catch {}
   }, []);
+
+  if (loading) {
+    return (
+      <Audio
+        height="100"
+        width="100"
+        color="#4fa94d"
+        ariaLabel="audio-loading"
+        wrapperStyle={{}}
+        wrapperClass="wrapper-class"
+        visible={true}
+      />
+    );
+  }
 
   return (
     <>
