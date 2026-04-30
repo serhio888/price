@@ -3,12 +3,24 @@ import Papa from "papaparse";
 import CategoryTable from "./categorytable/categoryTable";
 import { Audio } from "react-loader-spinner";
 import "./App.css";
+import HeaderTable from "./headerTable/headerTable";
 
 function App() {
-  const [headers, setHeaders] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [headerTable, setHeaderTable] = useState([]);
   const [positions, setPosition] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [columns] = useState([1, 2, 3]);
+  const [searchPosition, setSearchPosition] = useState("");
+
+  // const searchHandler = (e) => {
+  //   const str = e.target.value;
+
+  //   const searchPosition = positions.filter((pos) => {
+  //     pos[0].indexOf(str) !== -1;
+  //   });
+  //   const searchCategory = categories.filter((cat) => cat.indexOf(str) !== -1);
+  //   setPosition(searchPosition);
+  // };
 
   useEffect(() => {
     try {
@@ -17,28 +29,33 @@ function App() {
         {
           download: true,
           complete: (result) => {
-            let headers = [];
+            console.log(result);
+            let headers = result.data[0];
             let categories = [];
             let positions = [];
-            result.data.forEach((el, i) => {
-              if (i === 0) {
-                headers.push(el);
-                return;
+            let objPositions = {};
+
+            for (let i = 1; i < result.data.length; i++) {
+              if (result.data[i].filter((elem) => elem != "").length === 1) {
+                categories.push(result.data[i].filter((elem) => elem != "")[0]);
+                continue;
               }
-              if (el[0].length > 0 && el[1].length === 0) {
-                categories.push(el[0]);
-              }
-              if (el[4]) {
-                positions.push(el);
-              }
-            });
-            console.log(result);
-            console.log("headers:", headers.flat());
+              if (result.data[i].every((elem) => elem === "")) continue;
+              positions.push(result.data[i]);
+            }
+
+            for (let i = 0; i < categories.length; i++) {
+              objPositions[`${categories[i]}`] = positions.filter((elem) =>
+                elem.some((el) => el === `${categories[i]}`),
+              );
+            }
+
+            console.log(objPositions);
+            console.log("headers:", headers);
             console.log("categories:", categories);
             console.log("positions:", positions);
-            setHeaders(headers.flat());
-            setCategories(categories);
-            setPosition(positions);
+            setHeaderTable(headers);
+            setPosition(objPositions);
             setLoading(false);
           },
         },
@@ -63,20 +80,11 @@ function App() {
   return (
     <>
       <h1>Прайс лист</h1>
+      {/* <input type="text" onChange={searchHandler} /> */}
       <div className="container">
         <div className="table">
-          <div className="tableheader">
-            {headers.map((el, i) => {
-              if (i + 1 === headers.length || i === headers.length - 2)
-                return null;
-              return (
-                <div key={i}>
-                  <span>{el}</span>
-                </div>
-              );
-            })}
-          </div>
-          {categories.map((el, i) => {
+          <HeaderTable header={headerTable} columns={columns} />
+          {/* {categories.map((el, i) => {
             let pos = [];
             positions.forEach((p) => {
               console.log(p);
@@ -88,6 +96,15 @@ function App() {
               <React.Fragment key={i}>
                 <CategoryTable category={el} positions={pos} />
               </React.Fragment>
+            );
+          })} */}
+          {Object.keys(positions).map((key) => {
+            return (
+              <CategoryTable
+                category={key}
+                positions={positions[key]}
+                columns={columns}
+              />
             );
           })}
         </div>

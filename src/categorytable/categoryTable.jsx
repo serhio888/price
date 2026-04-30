@@ -1,13 +1,12 @@
 import React from "react";
 import "./categorytable.css";
 
-const CategoryTable = ({ category, positions }) => {
-  console.log(positions);
-  console.log(category);
-
+const CategoryTable = ({ positions, category, columns }) => {
   const showDescriptionHandler = (e) => {
     e.currentTarget.nextElementSibling.classList.toggle("show-description");
   };
+
+  console.log(positions);
 
   return (
     <div className="categorytable">
@@ -20,7 +19,7 @@ const CategoryTable = ({ category, positions }) => {
           <div className="position" key={i + 100}>
             <div className="position-info" onClick={showDescriptionHandler}>
               {pos.map((elem, i) => {
-                if (i === 0 || i === 1 || i === 2) {
+                if (columns.some((el) => el === i)) {
                   return (
                     <div className="" key={i}>
                       {elem}

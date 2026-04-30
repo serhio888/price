@@ -19,20 +19,7 @@
 .table:hover {
   cursor: pointer;
 }
-.tableheader {
-  display: flex;
-  justify-content: start;
-}
 
-
-.tableheader div{
-  flex: 1;
-  text-align: center;
-
-}
-.tableheader div:first-child {
-  flex: 0 0 50%;
-}
 
 .wrapper-class {
   display: flex;

@@ -16,7 +16,10 @@
     justify-content: start;
 }
 
-
+.position-info:hover {
+    background-color: blanchedalmond;
+    border-radius: 5px;
+}
 
 .position-info div{
     flex: 1;
