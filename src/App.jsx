@@ -4,23 +4,28 @@ import CategoryTable from "./categorytable/categoryTable";
 import { Audio } from "react-loader-spinner";
 import "./App.css";
 import HeaderTable from "./headerTable/headerTable";
+import _ from "lodash";
 
 function App() {
   const [headerTable, setHeaderTable] = useState([]);
   const [positions, setPosition] = useState([]);
   const [loading, setLoading] = useState(true);
   const [columns] = useState([1, 2, 3]);
-  const [searchPosition, setSearchPosition] = useState("");
 
-  // const searchHandler = (e) => {
-  //   const str = e.target.value;
-
-  //   const searchPosition = positions.filter((pos) => {
-  //     pos[0].indexOf(str) !== -1;
-  //   });
-  //   const searchCategory = categories.filter((cat) => cat.indexOf(str) !== -1);
-  //   setPosition(searchPosition);
-  // };
+  const searchHandler = (e) => {
+    const stringsearch = e.target.value;
+    // if (stringsearch.length < 3) return;
+    const reg = new RegExp(`${stringsearch}`, "gi");
+    const deep = _.cloneDeep(positions);
+    function searchPoint(arr) {
+      return arr[1].match(reg);
+    }
+    for (let categ in deep) {
+      deep[categ] = deep[categ].filter((pos) => searchPoint(pos));
+    }
+    setPosition(deep);
+    console.log(deep);
+  };
 
   useEffect(() => {
     try {
@@ -50,10 +55,10 @@ function App() {
               );
             }
 
-            console.log(objPositions);
-            console.log("headers:", headers);
-            console.log("categories:", categories);
-            console.log("positions:", positions);
+            // console.log(objPositions);
+            // console.log("headers:", headers);
+            // console.log("categories:", categories);
+            // console.log("positions:", positions);
             setHeaderTable(headers);
             setPosition(objPositions);
             setLoading(false);
@@ -80,24 +85,10 @@ function App() {
   return (
     <>
       <h1>Прайс лист</h1>
-      {/* <input type="text" onChange={searchHandler} /> */}
+      <input type="text" onChange={searchHandler} />
       <div className="container">
         <div className="table">
           <HeaderTable header={headerTable} columns={columns} />
-          {/* {categories.map((el, i) => {
-            let pos = [];
-            positions.forEach((p) => {
-              console.log(p);
-              if (p[3] === el) {
-                pos.push(p);
-              }
-            });
-            return (
-              <React.Fragment key={i}>
-                <CategoryTable category={el} positions={pos} />
-              </React.Fragment>
-            );
-          })} */}
           {Object.keys(positions).map((key) => {
             return (
               <CategoryTable

@@ -6,7 +6,7 @@ const CategoryTable = ({ positions, category, columns }) => {
     e.currentTarget.nextElementSibling.classList.toggle("show-description");
   };
 
-  console.log(positions);
+  // console.log(positions);
 
   return (
     <div className="categorytable">
