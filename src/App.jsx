@@ -4,28 +4,21 @@ import CategoryTable from "./categorytable/categoryTable";
 import { Audio } from "react-loader-spinner";
 import "./App.css";
 import HeaderTable from "./headerTable/headerTable";
-import _ from "lodash";
 
 function App() {
   const [headerTable, setHeaderTable] = useState([]);
-  const [positions, setPosition] = useState([]);
+  const [positions, setPosition] = useState({});
   const [loading, setLoading] = useState(true);
   const [columns] = useState([1, 2, 3]);
+  const [searchPosition, setSearchPosition] = useState("");
 
   const searchHandler = (e) => {
     const stringsearch = e.target.value;
+    setSearchPosition(stringsearch);
     // if (stringsearch.length < 3) return;
-    const reg = new RegExp(`${stringsearch}`, "gi");
-    const deep = _.cloneDeep(positions);
-    function searchPoint(arr) {
-      return arr[1].match(reg);
-    }
-    for (let categ in deep) {
-      deep[categ] = deep[categ].filter((pos) => searchPoint(pos));
-    }
-    setPosition(deep);
-    console.log(deep);
   };
+
+  console.log(positions);
 
   useEffect(() => {
     try {
@@ -58,7 +51,7 @@ function App() {
             // console.log(objPositions);
             // console.log("headers:", headers);
             // console.log("categories:", categories);
-            // console.log("positions:", positions);
+            console.log("positions:", positions);
             setHeaderTable(headers);
             setPosition(objPositions);
             setLoading(false);
@@ -85,17 +78,27 @@ function App() {
   return (
     <>
       <h1>Прайс лист</h1>
-      <input type="text" onChange={searchHandler} />
+      <div className="searchpanel">
+        <input
+          type="text"
+          onChange={searchHandler}
+          placeholder="найти"
+          maxLength={15}
+        />
+      </div>
       <div className="container">
         <div className="table">
           <HeaderTable header={headerTable} columns={columns} />
           {Object.keys(positions).map((key) => {
             return (
-              <CategoryTable
-                category={key}
-                positions={positions[key]}
-                columns={columns}
-              />
+              <React.Fragment key={key}>
+                <CategoryTable
+                  category={key}
+                  positions={positions[key]}
+                  columns={columns}
+                  search={searchPosition}
+                />
+              </React.Fragment>
             );
           })}
         </div>
