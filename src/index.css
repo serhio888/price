@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+
 @font-face {
   font-family: "Gabriele";
   src: url(./assets/Gabriela-Regular.ttf);
@@ -6,10 +11,18 @@
 body {
   margin: 0;
   font-family: "Gabriele";
+  background: url('./assets/back.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 #root {
-  width: 1126px;
+  /* width: 1126px;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -17,6 +30,20 @@ body {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
+  box-sizing: border-box; */
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
 }
+
+
+@media (max-width:500px) {
+  #root {
+    width: 100%;
+    
+  }
+}
+
 

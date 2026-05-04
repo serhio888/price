@@ -10,6 +10,10 @@
     margin-bottom: 10px;
 }
 
+.position:hover {
+   
+}
+
 .position-info {
     display: flex;
     text-align: center;
@@ -19,6 +23,7 @@
 .position-info:hover {
     background-color: blanchedalmond;
     border-radius: 5px;
+     cursor: pointer;
 }
 
 .position-info div{
