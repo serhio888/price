@@ -1,0 +1,46 @@
+.visitka-header {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 10px;
+}
+
+.visitka-header h2 {
+    margin: 0;
+}
+
+.images-icons {
+    height: 20px;
+    width: 20px;
+}
+
+.cosmetolog-info {
+    display: flex;
+    align-items: center;
+    max-width: max-content;
+}
+
+.cosmetolog-info img {
+    margin-right: 5px;
+}
+
+.cosmetolog-info a {
+    color:#111827;
+}
+
+.cosmetologist-block-info {
+    display: flex;
+    gap: 10px;
+}
+
+@media  (max-width:550px) {
+.visitka-header > *{
+  font-size: 14px;
+}
+
+.cosmetologist-block-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+}

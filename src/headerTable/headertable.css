@@ -1,6 +1,7 @@
 .tableheader {
   display: flex;
   justify-content: start;
+  font-size: 20px;
 }
 
 
@@ -11,4 +12,11 @@
 }
 .tableheader div:first-child {
   flex: 0 0 50%;
+}
+
+@media  (max-width:500px) {
+.tableheader {
+  
+  font-size: 14px;
+}
 }

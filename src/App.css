@@ -1,18 +1,21 @@
 .container {
     max-width: 1400px;
     width: 100%;
+    padding: 0 10px;
+    
 }
 
 .table {
   width: 100%;
-  background: white;
   border-radius: 24px;
-  box-shadow: 0 8px 20px rgba(168, 14, 14, 0.877);
+  /* box-shadow: 0 8px 20px rgba(168, 14, 14, 0.877); */
   padding: 20px;
+  background-color: #b6d2bf;
+  border: 2px solid #d7a66f;
 }
 
 .table:hover {
-  /* cursor: pointer; */
+  
 }
 
 
@@ -27,7 +30,8 @@
   display: flex;
   justify-content: start;
   margin-bottom: 10px;
-  width: 1000px;
+  padding: 0 10px;
+  margin: 10px 0 20px 0;
 }
 
 .searchpanel input {
@@ -35,14 +39,15 @@
   border-radius: 5px;
   padding: 10px 15px;
   width: 100%;
-  max-width: 150px;
+  max-width: 230px;
   transition: all 0.8s ease-out;
+  margin: 0 auto;
 }
 
 .searchpanel input:focus {
-  border-color: #007bff;
+  border-color: #d7a66f;
   outline: none;
-  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+  box-shadow: 0 0 5px rgb(215, 166, 111,0.5);
   max-width: 50%;;
 }
 

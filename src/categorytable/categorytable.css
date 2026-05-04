@@ -3,11 +3,16 @@
     margin-top: 20px;
 }
 
+.category {
+    font-size: 18px;
+}
+
 .position {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .position:hover {
@@ -21,7 +26,7 @@
 }
 
 .position-info:hover {
-    background-color: blanchedalmond;
+    background-color: #d7a66f;
     border-radius: 5px;
      cursor: pointer;
 }
@@ -37,7 +42,8 @@
 
 .description {
     border-radius: 5px;
-    background-color: rgb(212, 121, 121);
+    /* цвет фона сайта */
+    background-color: #E0D1B2  
 }
 
 .description {
@@ -46,4 +52,13 @@
 
 .show-description {
     display: block;
+}
+
+@media  (max-width:500px) {
+  .category {
+    font-size: 14px;
+}
+.position {
+    font-size: 14px;
+}
 }

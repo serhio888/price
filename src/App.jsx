@@ -4,6 +4,7 @@ import CategoryTable from "./categorytable/categoryTable";
 import { Audio } from "react-loader-spinner";
 import "./App.css";
 import HeaderTable from "./headerTable/headerTable";
+import Header from "./header/Header";
 
 function App() {
   const [headerTable, setHeaderTable] = useState([]);
@@ -77,12 +78,12 @@ function App() {
 
   return (
     <>
-      <h1>Прайс лист</h1>
+      <Header />
       <div className="searchpanel">
         <input
           type="text"
           onChange={searchHandler}
-          placeholder="найти"
+          placeholder="Введите услугу или препарат"
           maxLength={15}
         />
       </div>
