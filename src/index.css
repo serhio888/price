@@ -42,7 +42,7 @@ html, body {
 @media (max-width:500px) {
   #root {
     width: 100%;
-    
+    padding: 0 10px;
   }
 }
 
