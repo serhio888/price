@@ -30,6 +30,7 @@ html, body {
   text-align: center;
   padding-bottom: 20px;
   background-color: #b6d2bf;
+  min-height: 100vh;
 }
 
 

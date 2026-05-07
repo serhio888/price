@@ -10,57 +10,83 @@ function App() {
   const [headerTable, setHeaderTable] = useState([]);
   const [positions, setPosition] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [columns] = useState([1, 2, 3]);
   const [searchPosition, setSearchPosition] = useState("");
+  const url =
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLxuGZdqHNd4WOc1IUYf_U_pR8jTpELHONnZ5xOIN6hMq9YCQRMjW73q69heqFfBwdS_Z5EDwBB2tn/pub?output=csv";
 
   const searchHandler = (e) => {
     const stringsearch = e.target.value;
     setSearchPosition(stringsearch);
-    // if (stringsearch.length < 3) return;
   };
 
-  console.log(positions);
+  const searchPos = () => {
+    // if (searchPosition.length < 3) {
+    //   return positions;
+    // }
+    const reg = new RegExp(`${searchPosition}`, "gi");
+    const objP = structuredClone(positions);
+    const obj = {};
+
+    for (let category in objP) {
+      if (
+        objP[`${category}`].filter((pos) => pos[1].match(reg)).flat().length !=
+        0
+      ) {
+        obj[`${category}`] = objP[`${category}`].filter((pos) =>
+          pos[1].match(reg),
+        );
+      }
+    }
+    return obj;
+  };
 
   useEffect(() => {
-    try {
-      Papa.parse(
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLxuGZdqHNd4WOc1IUYf_U_pR8jTpELHONnZ5xOIN6hMq9YCQRMjW73q69heqFfBwdS_Z5EDwBB2tn/pub?output=csv",
-        {
+    const parsing = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          setError(true);
+          setLoading(false);
+        }
+        Papa.parse(url, {
           download: true,
           complete: (result) => {
             console.log(result);
-            let headers = result.data[0];
-            let categories = [];
-            let positions = [];
-            let objPositions = {};
-
-            for (let i = 1; i < result.data.length; i++) {
-              if (result.data[i].filter((elem) => elem != "").length === 1) {
-                categories.push(result.data[i].filter((elem) => elem != "")[0]);
-                continue;
+            if (result.errors.length > 0) {
+              setError(true);
+              setLoading(false);
+            } else {
+              let headers = result.data[0];
+              let objPositions = {};
+              for (let i = 1; i < result.data.length; i++) {
+                if (result.data[i].every((el) => el.length === 0)) continue;
+                if (
+                  result.data[i][0].length != 0 &&
+                  result.data[i][1].length === 0
+                ) {
+                  objPositions[`${result.data[i][0]}`] = [];
+                  continue;
+                }
+                objPositions[`${result.data[i][0]}`].push(result.data[i]);
               }
-              if (result.data[i].every((elem) => elem === "")) continue;
-              positions.push(result.data[i]);
+              setPosition(objPositions);
+              setLoading(false);
+              setHeaderTable(headers);
             }
-
-            for (let i = 0; i < categories.length; i++) {
-              objPositions[`${categories[i]}`] = positions.filter((elem) =>
-                elem.some((el) => el === `${categories[i]}`),
-              );
-            }
-
-            // console.log(objPositions);
-            // console.log("headers:", headers);
-            // console.log("categories:", categories);
-            console.log("positions:", positions);
-            setHeaderTable(headers);
-            setPosition(objPositions);
-            setLoading(false);
           },
-        },
-      );
-    } catch {}
+        });
+      } catch {
+        setError(true);
+        setLoading(false);
+      }
+    };
+    parsing();
   }, []);
+
+  const needPosition = searchPos();
+  console.log(needPosition);
 
   if (loading) {
     return (
@@ -74,6 +100,10 @@ function App() {
         visible={true}
       />
     );
+  }
+
+  if (error) {
+    return <h1>Не удалось загрузить данные попробуйте позже</h1>;
   }
 
   return (
@@ -91,14 +121,13 @@ function App() {
       <div className="container">
         <div className="table">
           <HeaderTable header={headerTable} columns={columns} />
-          {Object.keys(positions).map((key) => {
+          {Object.keys(needPosition).map((key) => {
             return (
               <React.Fragment key={key}>
                 <CategoryTable
                   category={key}
-                  positions={positions[key]}
+                  positions={needPosition[key]}
                   columns={columns}
-                  search={searchPosition}
                 />
               </React.Fragment>
             );
