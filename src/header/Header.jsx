@@ -4,6 +4,7 @@ import tel from "../assets/tel.png";
 import email from "../assets/email.png";
 import max from "../assets/max.png";
 import location from "../assets/location.png";
+import vk from "../assets/vk.png";
 
 const Header = () => {
   return (
@@ -40,6 +41,10 @@ const Header = () => {
           >
             Посмотреть на Яндекс Картах
           </a>
+        </div>
+        <div className="cosmetolog-info">
+          <img src={vk} alt="vk" className="images-icons" />
+          <a href="https://vk.com/cosmetologist_sms">cosmetologist_sms</a>
         </div>
       </div>
     </div>

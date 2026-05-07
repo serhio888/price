@@ -20,14 +20,36 @@
     max-width: max-content;
 }
 
+
+
 .cosmetolog-info img {
     margin-right: 5px;
 }
 
 .cosmetolog-info a {
     color:#111827;
+    position: relative;
+	cursor: pointer;
+	line-height: 1; /*задаём высоту строки*/
+	text-decoration: none; /*убираем подчёркивание*/
 }
 
+
+.cosmetolog-info a:after {
+ 	display: block;
+	position: absolute;
+	left: 0; 
+	width: 0;
+	height: 2px; 
+	background-color: #d7a66f ; 
+	content: "";
+	transition: width 0.3s ease-out; 
+}
+
+a:hover:after,
+a:focus:after {
+	width: 100%; 
+}
 .cosmetologist-block-info {
     display: flex;
     gap: 10px;
