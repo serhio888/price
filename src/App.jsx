@@ -85,6 +85,7 @@ function App() {
           onChange={searchHandler}
           placeholder="Введите услугу или препарат"
           maxLength={15}
+          id="input-search"
         />
       </div>
       <div className="container">

@@ -34,7 +34,7 @@
   margin: 10px 0 20px 0;
 }
 
-.searchpanel input {
+#input-search {
   border: 2px solid #ddd;
   border-radius: 5px;
   padding: 10px 15px;
@@ -44,10 +44,21 @@
   margin: 0 auto;
 }
 
-.searchpanel input:focus {
+#input-search:focus {
   border-color: #d7a66f;
   outline: none;
   box-shadow: 0 0 5px rgb(215, 166, 111,0.5);
   max-width: 50%;;
+}
+
+ @media (max-width:500px) {
+#input-search {
+  border-color: #d7a66f;
+  outline: none;
+}
+
+#input-search:focus {
+  transition: none !important;
+}
 }
 
