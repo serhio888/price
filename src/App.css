@@ -33,8 +33,7 @@
   border: 2px solid #ddd;
   border-radius: 5px;
   padding: 10px 15px;
-  width: 100%;
-  max-width: 230px;
+  width: 230px;
   transition: all 0.8s ease-out;
   margin: 0 auto;
 }
@@ -43,17 +42,18 @@
   border-color: #d7a66f;
   outline: none;
   box-shadow: 0 0 5px rgb(215, 166, 111,0.5);
-  max-width: 50%;;
+  width: 400px;
 }
 
- @media (max-width:500px) {
-#input-search {
-  border-color: #d7a66f;
-  outline: none;
-}
+ @media (max-width:500px){
 
-#input-search:focus {
-  transition: none !important;
-}
+  #input-search {
+    width: 100%;                   
+    transition: none !important;
+  }
+
+    #input-search:focus {
+       width: 100%;   
+  }
 }
 
