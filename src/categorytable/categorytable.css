@@ -13,6 +13,7 @@
     justify-content: center;
     margin-bottom: 10px;
     font-size: 16px;
+    
 }
 
 .position:hover {
@@ -23,6 +24,27 @@
     display: flex;
     text-align: center;
     justify-content: start;
+    
+}
+
+.position-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.down {
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.down img {
+    width: 15px;
+    height: 15px;
+    
 }
 
 .position-info:hover {

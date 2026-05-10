@@ -1,22 +1,12 @@
 import React from "react";
 import "./categorytable.css";
+import down from "../assets/down.png";
 
 const CategoryTable = ({ positions, category, columns }) => {
   const showDescriptionHandler = (e) => {
     e.currentTarget.nextElementSibling.classList.toggle("show-description");
   };
 
-  // function needPosition() {
-  //   if (search.length < 3) return positions;
-  //   const reg = new RegExp(`${search}`, "gi");
-  //   const deep = structuredClone(positions);
-  //   const aaa = deep.filter((pos) => pos[1].match(reg));
-  //   return aaa;
-  // }
-
-  // const searchPos = needPosition();
-
-  // console.log(positions);
   return (
     <div className="categorytable">
       <div className="category">
@@ -29,11 +19,19 @@ const CategoryTable = ({ positions, category, columns }) => {
             <div className="position-info" onClick={showDescriptionHandler}>
               {pos.map((elem, i) => {
                 if (columns.some((el) => el === i)) {
-                  return (
-                    <div className="" key={i}>
-                      {elem}
-                    </div>
-                  );
+                  if (i === 1) {
+                    return (
+                      <React.Fragment key={i}>
+                        <div className="position-name">
+                          <span className="down">
+                            <img src={down} alt="down" />
+                          </span>
+                          <span>{elem}</span>
+                        </div>
+                      </React.Fragment>
+                    );
+                  }
+                  return <div>{elem}</div>;
                 }
               })}
             </div>
