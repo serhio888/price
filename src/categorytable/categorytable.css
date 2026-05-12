@@ -29,7 +29,7 @@
 
 .position-name {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
@@ -39,6 +39,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-grow: 0;
+}
+
+.name {
+    flex: 1;
+}
+
+.unit_price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .down img {

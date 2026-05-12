@@ -26,12 +26,16 @@ const CategoryTable = ({ positions, category, columns }) => {
                           <span className="down">
                             <img src={down} alt="down" />
                           </span>
-                          <span>{elem}</span>
+                          <span className="name">{elem}</span>
                         </div>
                       </React.Fragment>
                     );
                   }
-                  return <div>{elem}</div>;
+                  return (
+                    <div className="unit_price">
+                      <span>{elem}</span>
+                    </div>
+                  );
                 }
               })}
             </div>
