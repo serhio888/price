@@ -5,6 +5,7 @@ import { Audio } from "react-loader-spinner";
 import "./App.css";
 import HeaderTable from "./headerTable/headerTable";
 import Header from "./header/Header";
+import { nanoid } from "nanoid";
 
 function App() {
   const [headerTable, setHeaderTable] = useState([]);
@@ -13,6 +14,7 @@ function App() {
   const [error, setError] = useState(false);
   const [columns] = useState([1, 2, 3]);
   const [searchPosition, setSearchPosition] = useState("");
+  const [descriptionArray, setDescriptionArray] = useState([]);
   const url =
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLxuGZdqHNd4WOc1IUYf_U_pR8jTpELHONnZ5xOIN6hMq9YCQRMjW73q69heqFfBwdS_Z5EDwBB2tn/pub?output=csv";
 
@@ -21,24 +23,31 @@ function App() {
     setSearchPosition(stringsearch);
   };
 
+  const showInfoHandler = (id) => {
+    if (descriptionArray.includes(id)) {
+      setDescriptionArray(descriptionArray.filter((elem) => elem != id));
+    } else {
+      setDescriptionArray([...descriptionArray, id]);
+    }
+  };
+
   const searchPos = () => {
-    // if (searchPosition.length < 3) {
-    //   return positions;
-    // }
     const reg = new RegExp(`${searchPosition}`, "gi");
     const objP = structuredClone(positions);
     const obj = {};
 
     for (let category in objP) {
       if (
-        objP[`${category}`].filter((pos) => pos[1].match(reg)).flat().length !=
-        0
+        objP[`${category}`]
+          .filter((pos) => pos["Наименование"].match(reg))
+          .flat().length != 0
       ) {
         obj[`${category}`] = objP[`${category}`].filter((pos) =>
-          pos[1].match(reg),
+          pos["Наименование"].match(reg),
         );
       }
     }
+
     return obj;
   };
 
@@ -52,25 +61,39 @@ function App() {
         }
         Papa.parse(url, {
           download: true,
+          header: true,
           complete: (result) => {
             console.log(result);
             if (result.errors.length > 0) {
               setError(true);
               setLoading(false);
             } else {
-              let headers = result.data[0];
+              let headers = [];
               let objPositions = {};
-              for (let i = 1; i < result.data.length; i++) {
-                if (result.data[i].every((el) => el.length === 0)) continue;
+              let name = undefined;
+              Object.keys(result.data[0]).forEach((el, ind, arr) => {
+                if (ind != arr.length - 1) {
+                  headers.push(el);
+                }
+              });
+              console.log(headers);
+              for (let i = 0; i < result.data.length; i++) {
+                if (Object.values(result.data[i]).join("").length === 0)
+                  continue;
+
                 if (
-                  result.data[i][0].length != 0 &&
-                  result.data[i][1].length === 0
+                  Object.values(result.data[i])[0].length != 0 &&
+                  Object.values(result.data[i])[1].length === 0
                 ) {
-                  objPositions[`${result.data[i][0]}`] = [];
+                  name = Object.values(result.data[i])[0];
+                  objPositions[`${name}`] = [];
                   continue;
                 }
-                objPositions[`${result.data[i][0]}`].push(result.data[i]);
+                let obj = result.data[i];
+                obj.id = nanoid();
+                objPositions[`${name}`].push(obj);
               }
+              console.log(objPositions);
               setPosition(objPositions);
               setLoading(false);
               setHeaderTable(headers);
@@ -86,7 +109,6 @@ function App() {
   }, []);
 
   const needPosition = searchPos();
-  console.log(needPosition);
 
   if (loading) {
     return (
@@ -127,7 +149,8 @@ function App() {
                 <CategoryTable
                   category={key}
                   positions={needPosition[key]}
-                  columns={columns}
+                  showInfo={descriptionArray}
+                  descriptionHandler={showInfoHandler}
                 />
               </React.Fragment>
             );

@@ -34,7 +34,16 @@
 }
 
 .down {
-    margin-right: 5px;
+    margin: 0 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+}
+
+.up {
+    margin: 0 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -55,7 +64,11 @@
 .down img {
     width: 15px;
     height: 15px;
-    
+}
+
+.up img {
+    width: 15px;
+    height: 15px;
 }
 
 .position-info:hover {
@@ -80,12 +93,12 @@
 }
 
 .description {
-    display: none;
-}
-
-.show-description {
     display: block;
 }
+
+/* .show-description {
+    display: block;
+} */
 
 @media  (max-width:500px) {
   .category {

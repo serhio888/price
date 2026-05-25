@@ -1,22 +1,38 @@
 import React from "react";
 import "./categorytable.css";
-import down from "../assets/down.png";
+import Position from "../position/Position";
 
-const CategoryTable = ({ positions, category, columns }) => {
-  const showDescriptionHandler = (e) => {
-    e.currentTarget.nextElementSibling.classList.toggle("show-description");
-  };
-
+const CategoryTable = ({
+  positions,
+  category,
+  showInfo,
+  descriptionHandler,
+}) => {
   return (
     <div className="categorytable">
       <div className="category">
         <p>{category}</p>
       </div>
 
-      {positions.map((pos, i) => {
+      {positions.map((el, index) => {
         return (
-          <div className="position" key={i + 100}>
-            <div className="position-info" onClick={showDescriptionHandler}>
+          <React.Fragment key={index}>
+            <Position
+              position={el}
+              showInfo={showInfo}
+              descriptionHandler={descriptionHandler}
+            />
+          </React.Fragment>
+        );
+      })}
+
+      {/* {positions.map((pos, ind) => {
+        return (
+          <div className="position" key={ind + 100}>
+            <div
+              className="position-info"
+              onClick={() => showDescriptionHandler(`${index}${ind}`)}
+            >
               {pos.map((elem, i) => {
                 if (columns.some((el) => el === i)) {
                   if (i === 1) {
@@ -32,7 +48,7 @@ const CategoryTable = ({ positions, category, columns }) => {
                     );
                   }
                   return (
-                    <div className="unit_price">
+                    <div className="unit_price" key={i + 34}>
                       <span>{elem}</span>
                     </div>
                   );
@@ -44,7 +60,7 @@ const CategoryTable = ({ positions, category, columns }) => {
             </div>
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };

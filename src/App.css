@@ -2,7 +2,7 @@
     max-width: 1400px;
     width: 100%;
     padding: 0 10px;
-    
+    display: flex;
 }
 
 .table {
@@ -11,6 +11,7 @@
   padding: 20px;
   background-color: #b6d2bf;
   border: 2px solid #d7a66f;
+  flex: 1;
 }
 
 

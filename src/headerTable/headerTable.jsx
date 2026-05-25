@@ -1,18 +1,15 @@
 import React from "react";
 import "./headertable.css";
 
-const HeaderTable = ({ header, columns }) => {
+const HeaderTable = ({ header }) => {
   return (
     <div className="tableheader">
       {header.map((name, index) => {
-        if (columns.some((el) => el === index)) {
-          return (
-            <div key={index}>
-              <span>{name}</span>
-            </div>
-          );
-        }
-        return null;
+        return (
+          <div key={index}>
+            <span>{name}</span>
+          </div>
+        );
       })}
     </div>
   );
