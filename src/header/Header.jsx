@@ -13,7 +13,7 @@ const Header = () => {
         <h2>Селиванова Мария Сергеевна</h2>
       </div>
       <div>
-        <span>Врач-косметолог</span>
+        <h4>Врач-косметолог</h4>
       </div>
       <div className="cosmetologist-block-info">
         <div className="cosmetolog-info">
