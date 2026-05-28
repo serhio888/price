@@ -16,10 +16,6 @@
     
 }
 
-.position:hover {
-   
-}
-
 .position-info {
     display: flex;
     text-align: center;
@@ -95,10 +91,6 @@
 .description {
     display: block;
 }
-
-/* .show-description {
-    display: block;
-} */
 
 @media  (max-width:500px) {
   .category {

@@ -63,7 +63,6 @@ function App() {
           download: true,
           header: true,
           complete: (result) => {
-            console.log(result);
             if (result.errors.length > 0) {
               setError(true);
               setLoading(false);
@@ -76,7 +75,6 @@ function App() {
                   headers.push(el);
                 }
               });
-              console.log(headers);
               for (let i = 0; i < result.data.length; i++) {
                 if (Object.values(result.data[i]).join("").length === 0)
                   continue;
@@ -93,7 +91,6 @@ function App() {
                 obj.id = nanoid();
                 objPositions[`${name}`].push(obj);
               }
-              console.log(objPositions);
               setPosition(objPositions);
               setLoading(false);
               setHeaderTable(headers);
