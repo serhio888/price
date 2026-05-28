@@ -112,7 +112,7 @@ function App() {
       <Audio
         height="100"
         width="100"
-        color="#4fa94d"
+        color="#d7a66f"
         ariaLabel="audio-loading"
         wrapperStyle={{}}
         wrapperClass="wrapper-class"
