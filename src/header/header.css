@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: start;
     padding: 10px;
+    font-size: 14px;
+    
 }
 
 .visitka-header h2 {
@@ -27,7 +29,7 @@
 }
 
 .cosmetolog-info a {
-    color:#111827;
+    color: #1e2a24;;
     position: relative;
 	cursor: pointer;
 	line-height: 1; /*задаём высоту строки*/

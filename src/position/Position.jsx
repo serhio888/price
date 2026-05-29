@@ -24,7 +24,7 @@ const Position = ({ position, showInfo, descriptionHandler }) => {
           <span className="name">{position["Наименование"]}</span>
         </div>
         <div className="unit_price">
-          <span>{position["Ед. измерения"]}</span>
+          <span>{position["Продолжительность процедуры"]}</span>
         </div>
         <div className="unit_price">
           <span>{position["цена, ₽"]}</span>

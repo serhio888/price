@@ -1,25 +1,42 @@
 .tableheader {
   display: flex;
   justify-content: start;
-  font-size: 20px;
+  font-size: 14px;
+  align-items: center;
 }
 
 
 .tableheader div{
   flex: 1;
   text-align: center;
-
 }
+.tableheader div:first-child {
+     flex-basis: 70%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.tableheader div{
+   hyphens: auto;
+}
+
+@media  (max-width:500px) {
+.tableheader {
+  font-size: 14px;
+}
+
 .tableheader div:first-child {
      flex-basis: 50%;
     flex-grow: 0;
     flex-shrink: 0;
     
 }
+}
 
-@media  (max-width:500px) {
+@media  (max-width:700px) {
 .tableheader {
   
   font-size: 14px;
 }
+
 }

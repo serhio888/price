@@ -4,22 +4,34 @@
 
 
 @font-face {
-  font-family: "Gabriele";
-  src: url(./assets/Gabriela-Regular.ttf);
+  font-family: "Cormorant";
+  src: url('./assets/Cormorant-Italic.ttf');
+  font-style: italic;
 }
+
+
+@font-face {
+  font-family: "Involve";
+  src: url('./assets/Involve-Regular.ttf');
+}
+
 
 body {
   margin: 0;
-  font-family: "Gabriele";
+  font-family: Involve, Helvetica, sans-serif;
   background: url('./assets/back.png');
   background-size: cover;
   background-attachment: fixed;
-  color:#111827;
+  color:#1e2a24;
 }
 
 html, body {
     overflow-x: hidden;
     width: 100%;
+}
+
+p {
+  margin: 0;
 }
 
 #root {

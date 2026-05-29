@@ -12,7 +12,6 @@ function App() {
   const [positions, setPosition] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [columns] = useState([1, 2, 3]);
   const [searchPosition, setSearchPosition] = useState("");
   const [descriptionArray, setDescriptionArray] = useState([]);
   const url =
@@ -78,7 +77,6 @@ function App() {
               for (let i = 0; i < result.data.length; i++) {
                 if (Object.values(result.data[i]).join("").length === 0)
                   continue;
-
                 if (
                   Object.values(result.data[i])[0].length != 0 &&
                   Object.values(result.data[i])[1].length === 0
@@ -139,7 +137,7 @@ function App() {
       </div>
       <div className="container">
         <div className="table">
-          <HeaderTable header={headerTable} columns={columns} />
+          <HeaderTable header={headerTable} />
           {Object.keys(needPosition).map((key) => {
             return (
               <React.Fragment key={key}>
